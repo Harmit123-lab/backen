@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const {
@@ -7,12 +8,15 @@ const {
   login,
   sendForgotPasswordOtp,
   verifyForgotPasswordOtp,
-  resetPassword
+  resetPassword,
+  getMe,
+  verifyToken
 } = require("../controllers/auth_controller");
 
 router.post("/send-otp", sendOtp);
 router.post("/signup", signup);
 router.post("/login", login);
+router.get("/me", verifyToken, getMe);
 
 // Forgot Password Routes
 router.post("/forgot-password/send-otp", sendForgotPasswordOtp);
